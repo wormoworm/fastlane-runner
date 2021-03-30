@@ -5,13 +5,13 @@
 wget https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip
 unzip commandlinetools-linux-6609375_latest.zip -d cmdline-tools
 rm commandlinetools-linux-6609375_latest.zip
-sudo mv cmdline-tools $ANDROID_HOME/
+sudo mv cmdline-tools $ANDROID_SDK_ROOT /
 
 # Remove rogue debian directory (may not be needed?).
-sudo rm -rf ${ANDROID_HOME}/build-tools/debian/
+sudo rm -rf ${ANDROID_SDK_ROOT }/build-tools/debian/
 
 # Move to the command tools bin directory (we have not yet added it to $PATH but we want to use the sdkmanager)
-cd $ANDROID_HOME/cmdline-tools/tools/bin
+cd $ANDROID_SDK_ROOT /cmdline-tools/tools/bin
 
 # Accept SDK licenses
 yes | ./sdkmanager --licenses
