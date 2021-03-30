@@ -25,7 +25,7 @@ RUN apt update && apt install -y --no-install-recommends \
     android-sdk
 
 # Set Android SDK path and add it to $PATH
-ENV ANDROID_SDK_ROOT =/usr/lib/android-sdk
+ENV ANDROID_SDK_ROOT=/usr/lib/android-sdk
 ENV PATH="${ANDROID_SDK_ROOT}/cmdline-tools/tools/bin:$PATH"
 ENV WORK_DIR=/work/
 
