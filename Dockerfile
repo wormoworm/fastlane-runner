@@ -21,21 +21,24 @@ RUN apt update && apt install -y --no-install-recommends \
     g++ \
     make \
     locales \
-    openjdk-8-jdk
-    # android-sdk
+    openjdk-8-jdk \
+    android-sdk
 
-RUN locale-gen en_GB.UTF-8
-
-ENV LC_ALL=en_GB.UTF-8
-ENV LANG=en_GB.UTF-8
-
-RUN gem install fastlane bundler
-
-# ENV ANDROID_HOME=/usr/lib/android-sdk
-# ENV PATH="${ANDROID_HOME}/cmdline-tools/tools/bin:$PATH"
+# Set Android SDK path and add it to $PATH
+ENV ANDROID_HOME=/usr/lib/android-sdk
+ENV PATH="${ANDROID_HOME}/cmdline-tools/tools/bin:$PATH"
 ENV WORK_DIR=/work/
 
 # # Create the directory for our script(s) and work.
 RUN mkdir /scripts $WORK_DIR
-COPY entrypoint-local.sh /scripts/
+COPY scripts/setup-sdk.sh scripts/entrypoint-local.sh /scripts/
 RUN chmod 777 /scripts/*
+
+# Install the Android SDK
+RUN /scripts/setup-sdk.sh
+
+# Install Fastlane
+RUN locale-gen en_GB.UTF-8
+ENV LC_ALL=en_GB.UTF-8
+ENV LANG=en_GB.UTF-8
+RUN gem install fastlane bundler
