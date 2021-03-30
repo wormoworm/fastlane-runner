@@ -1,6 +1,9 @@
 #!/bin/bash
 # Installs the base Android SDK components, including the command-line tools.
 
+# Ensure SDK dir is writeable to all. This is important for running in a Docker image, as the user may not always be root.
+sudo chmod 777 -R $ANDROID_SDK_ROOT
+
 # Download and extract the tools.
 wget https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip
 unzip commandlinetools-linux-6609375_latest.zip -d cmdline-tools
