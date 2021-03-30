@@ -26,6 +26,9 @@ echo "Will use container name: ${container_name}"
 
 # Run the container with the necessary options.
 sudo docker run -it --rm \
+-e GIT_REPOSITORY=https://github.com/wormoworm/jmri-roster-android.git
 -e GIT_BRANCH=${git_branch} \
+-e FASTLANE_PLATFORM=android \
+-e FASTLANE_LANE=app_test \
 --name ${container_name} \
 tomhomewood/fastlane-runner:latest $container_cmd
