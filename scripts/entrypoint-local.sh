@@ -25,6 +25,7 @@ else
     echo "Branch: ${branch}"
 
     git clone -b $branch $GIT_REPOSITORY $WORK_DIR
+    chmod 777 -R $WORK_DIR
     cd $WORK_DIR
 fi
 
